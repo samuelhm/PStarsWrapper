@@ -12,9 +12,9 @@ namespace PStarsWrapper
         {
             Deck MiBaraja = new Deck();
 
-            foreach (Card c in MiBaraja.Cartas)
+            foreach (Card c in MiBaraja.CardRemainingList)
             {
-                Console.WriteLine(c.ToString());
+                Console.WriteLine(c.ToString()+" Abb Name = " + c.Name);
             }
             Console.ReadLine();
 
