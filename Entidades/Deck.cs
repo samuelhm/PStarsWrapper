@@ -7,7 +7,7 @@ namespace PStarsWrapper.Entidades
 {
     class Deck
     {
-        public Dictionary<string, Card> Cartas { get; } // Dejamos como Solo lectura el diccionario.
+        public Card[] Cartas { get; } // Dejamos como Solo lectura el diccionario.
         public Deck()
         {
             Cartas = GenerarCartas();
@@ -41,10 +41,10 @@ namespace PStarsWrapper.Entidades
             string palobuffer;
             switch (palo)
             {
-                case Suits.Hearts: palobuffer = "C"; break;
-                case Suits.Spades: palobuffer = "P"; break;
-                case Suits.Diamonds: palobuffer = "R"; break;
-                case Suits.Clubs: palobuffer = "T"; break;
+                case Suits.Hearts: palobuffer = "H"; break;
+                case Suits.Spades: palobuffer = "S"; break;
+                case Suits.Diamonds: palobuffer = "D"; break;
+                case Suits.Clubs: palobuffer = "C"; break;
                 default: throw new FormatException();
             }
 
@@ -60,18 +60,18 @@ namespace PStarsWrapper.Entidades
         }
 
 
-        private Dictionary<string, Card> GenerarCartas()
+        private Card[] GenerarCartas()
         {
             //Recorre Todos los palos incluidos en el enum con ***foreach (Palos palo in Enum.GetValues(typeof(Palos))) {}****
             //Segun parece hacer un cast (Suit[]) hace que vaya mas rapido.
 
-            Dictionary<string, Card> buffer = new Dictionary<string, Card>();
+            Card[] buffer = new Card[52];
+            int contador = 0;
             foreach (Suits palo in (Suits[])Enum.GetValues(typeof(Suits))) 
             {
                 foreach (Rank valor in (Rank[])Enum.GetValues(typeof(Rank)))
                 {
-                    string tkey = AsignarTkey(palo, valor);
-                    buffer.Add(tkey, new Card(valor, palo));
+                    buffer[contador] = new Card(valor, palo);
                 }
 
             }

@@ -12,9 +12,9 @@ namespace PStarsWrapper
         {
             Deck MiBaraja = new Deck();
 
-            foreach (KeyValuePair<string,Card> c in MiBaraja.Cartas)
+            foreach (Card c in MiBaraja.Cartas)
             {
-                Console.WriteLine(c.Key.ToString()+" - "+  c.Value.ToString());
+                Console.WriteLine(c.ToString());
             }
             Console.ReadLine();
 
