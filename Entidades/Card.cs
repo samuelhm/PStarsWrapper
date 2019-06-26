@@ -4,8 +4,8 @@ namespace PStarsWrapper.Entidades
 {
     internal class Card
     {
-        public Rank Valor { get; set; }
-        public Suits Palo { get; set; }
+        public Rank Valor { get; }
+        public Suits Palo { get; }
 
         public Card(Rank v, Suits p)
         {

@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>PStarsWrapper</RootNamespace>
     <AssemblyName>PStarsWrapper</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -27,6 +27,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -47,11 +48,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
-    <NoWin32Manifest>true</NoWin32Manifest>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject>PStarsWrapper.Consola</StartupObject>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -69,17 +69,46 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Externo\USER32.cs" />
+    <Compile Include="Externo\GDI32.cs" />
     <Compile Include="Consola.cs" />
     <Compile Include="Entidades\Deck.cs" />
     <Compile Include="Entidades\Card.cs" />
     <Compile Include="Entidades\Suits.cs" />
     <Compile Include="Entidades\Rank.cs" />
+    <Compile Include="Forms\PsWrapper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\PsWrapper.Designer.cs">
+      <DependentUpon>PsWrapper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Util\Capturadores.cs" />
+    <Compile Include="Util\ManejoVentanas.cs" />
+    <Compile Include="Util\Otros.cs" />
+    <Compile Include="Forms\VistaImagen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\VistaImagen.Designer.cs">
+      <DependentUpon>VistaImagen.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\PsWrapper.resx">
+      <DependentUpon>PsWrapper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\VistaImagen.resx">
+      <DependentUpon>VistaImagen.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
