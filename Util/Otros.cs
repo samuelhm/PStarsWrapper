@@ -24,54 +24,23 @@ namespace PStarsWrapper
         {
             i.Save(ruta + "Cartas\\" + Guid.NewGuid().ToString() + ".bmp");
         }
-        public static bool ExisteImagen(Image img)
+        public static bool ExisteImagen(Bitmap bmp)
         {
-            
             List<String> ListaArchivos = ObtenerTodosLosArchivos(ruta);
-            List<Image> ListaImagenes = new List<Image>();
-            foreach (string ruta in ListaArchivos)
+            List<Bitmap> ListaImagenes = new List<Bitmap>();
+            foreach (string path in ListaArchivos)
             {
-                Image i = Image.FromFile(ruta);
+                Bitmap i = new Bitmap(path);
                 ListaImagenes.Add(i);
             }
-            bool buffer = true;
-            foreach (Image i in ListaImagenes)
+            
+            foreach (Bitmap b in ListaImagenes)
             {
-                if (i.Width == img.Width && i.Height == img.Height)
-                {
-                    Bitmap b1 = new Bitmap(i);
-                    Bitmap b2 = new Bitmap(img);
-                    
-                    for (int h = 0; h < b1.Width; h++)
-                    {
-                        for (int j = 0; j < b1.Height; j++)
-                        {
-                            if (b1.GetPixel(h, j).ToString() == b2.GetPixel(h, j).ToString())
-                            {
-                                string a = b1.GetPixel(h, j).ToString();
-                                string b = b2.GetPixel(h, j).ToString();
-                            }
-                            else
-                            {
-                                string a = b1.GetPixel(h, j).ToString();
-                                string b = b2.GetPixel(h, j).ToString();
-                                buffer = false;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Error, Tamaños de imagen no Son Iguales.");
-                    return false;
-                }
-                
+                if (CompareBitmapsLazy(bmp, b)) return true;
             }
-            if (buffer) Console.WriteLine("Imagen Exacta encontrada!");
-            if (!buffer) Console.WriteLine("Imagen Discordante!");
-
-            Util.MostrarImagen(img);
-            return buffer;
+            // Si no ha retornado true, encontrando una imagen, entoces no existe, retornamos false
+            Console.WriteLine("La Imagen no corresponde con La imagen destino.");
+            return false;
             
         }
 
@@ -81,6 +50,27 @@ namespace PStarsWrapper
             List<string> lista = new List<string>();
             lista.AddRange(Directory.GetFiles(ruta));
             return lista;
+        }
+        public static bool CompareBitmapsLazy(Bitmap bmp1, Bitmap bmp2)
+        {
+            if (bmp1 == null || bmp2 == null)
+                return false;
+            if (object.Equals(bmp1, bmp2))
+                return true;
+            if (!bmp1.Size.Equals(bmp2.Size) || !bmp1.PixelFormat.Equals(bmp2.PixelFormat))
+                return false;
+
+            //Compare bitmaps using GetPixel method
+            for (int column = 0; column < bmp1.Width; column++)
+            {
+                for (int row = 0; row < bmp1.Height; row++)
+                {
+                    if (!bmp1.GetPixel(column, row).Equals(bmp2.GetPixel(column, row)))
+                        return false;
+                }
+            }
+
+            return true;
         }
     }
 

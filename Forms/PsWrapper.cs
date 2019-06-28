@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PStarsWrapper;
+using System.Threading;
 
 namespace PStarsWrapper.MisForms
 {
@@ -52,6 +53,7 @@ namespace PStarsWrapper.MisForms
             while (Util.ObtenerTodosLosArchivos(Util.ruta).Count < 54)
             {
                 Util.RealizarCapturaContinuaCartas();
+                Thread.Sleep(3000);
             }
             
         }
