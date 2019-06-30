@@ -23,6 +23,7 @@ namespace PStarsWrapper
         public static void GuardarImagenCarta(Image i)
         {
             i.Save(ruta + "Cartas\\" + Guid.NewGuid().ToString() + ".bmp");
+            i.Dispose();
         }
         public static bool ExisteImagen(Bitmap bmp)
         {
@@ -31,7 +32,9 @@ namespace PStarsWrapper
             foreach (string path in ListaArchivos)
             {
                 Bitmap i = new Bitmap(path);
-                ListaImagenes.Add(i);
+                ListaImagenes.Add(new Bitmap(i));
+                i.Dispose();
+                
             }
             
             foreach (Bitmap b in ListaImagenes)

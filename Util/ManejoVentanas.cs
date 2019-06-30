@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 
 namespace PStarsWrapper
@@ -45,6 +46,16 @@ namespace PStarsWrapper
         public static IEnumerable<IntPtr> FindWindowsWithText(string titulo)
         {
             return FindWindows(  delegate (IntPtr wnd, IntPtr param){ return ObtenerNombreVentana(wnd).Contains(titulo);}   );
+        }
+        public static bool MoverVentana(IntPtr handle,int width,int height)
+        {
+            User32.RECT r = new User32.RECT();
+            User32.GetWindowRect(handle, ref r);
+            return User32.MoveWindow(handle, r.Left, r.Top, width, height, true);
+        }
+        public static bool MoverVentana(IntPtr handle,int x,int y, int width, int height)
+        {
+            return User32.MoveWindow(handle, x, y, width, height, true);
         }
     }
 }

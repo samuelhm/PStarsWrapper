@@ -82,6 +82,11 @@
     <Compile Include="Forms\PsWrapper.Designer.cs">
       <DependentUpon>PsWrapper.cs</DependentUpon>
     </Compile>
+    <Compile Include="BitmapsCartas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BitmapsCartas.resx</DependentUpon>
+    </Compile>
     <Compile Include="Util\Capturadores.cs" />
     <Compile Include="Util\ManejoVentanas.cs" />
     <Compile Include="Util\Otros.cs" />
@@ -94,6 +99,58 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
+    <None Include="Resources\TC.bmp" />
+    <None Include="Resources\QC.bmp" />
+    <None Include="Resources\KC.bmp" />
+    <None Include="Resources\JC.bmp" />
+    <None Include="Resources\AC.bmp" />
+    <None Include="Resources\9C.bmp" />
+    <None Include="Resources\8C.bmp" />
+    <None Include="Resources\7C.bmp" />
+    <None Include="Resources\6C.bmp" />
+    <None Include="Resources\5C.bmp" />
+    <None Include="Resources\4C.bmp" />
+    <None Include="Resources\3C.bmp" />
+    <None Include="Resources\2C.bmp" />
+    <None Include="Resources\TS.bmp" />
+    <None Include="Resources\QS.bmp" />
+    <None Include="Resources\KS.bmp" />
+    <None Include="Resources\JS.bmp" />
+    <None Include="Resources\AS.bmp" />
+    <None Include="Resources\9S.bmp" />
+    <None Include="Resources\8S.bmp" />
+    <None Include="Resources\7S.bmp" />
+    <None Include="Resources\6S.bmp" />
+    <None Include="Resources\5S.bmp" />
+    <None Include="Resources\4S.bmp" />
+    <None Include="Resources\3S.bmp" />
+    <None Include="Resources\2S.bmp" />
+    <None Include="Resources\TH.bmp" />
+    <None Include="Resources\QH.bmp" />
+    <None Include="Resources\KH.bmp" />
+    <None Include="Resources\JH.bmp" />
+    <None Include="Resources\AH.bmp" />
+    <None Include="Resources\9H.bmp" />
+    <None Include="Resources\8H.bmp" />
+    <None Include="Resources\7H.bmp" />
+    <None Include="Resources\6H.bmp" />
+    <None Include="Resources\5H.bmp" />
+    <None Include="Resources\4H.bmp" />
+    <None Include="Resources\3H.bmp" />
+    <None Include="Resources\2H.bmp" />
+    <None Include="Resources\TD.bmp" />
+    <None Include="Resources\QD.bmp" />
+    <None Include="Resources\KD.bmp" />
+    <None Include="Resources\JD.bmp" />
+    <None Include="Resources\AD.bmp" />
+    <None Include="Resources\9D.bmp" />
+    <None Include="Resources\8D.bmp" />
+    <None Include="Resources\7D.bmp" />
+    <None Include="Resources\6D.bmp" />
+    <None Include="Resources\5D.bmp" />
+    <None Include="Resources\4D.bmp" />
+    <None Include="Resources\3D.bmp" />
+    <None Include="Resources\2D.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -108,6 +165,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\VistaImagen.resx">
       <DependentUpon>VistaImagen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BitmapsCartas.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BitmapsCartas.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

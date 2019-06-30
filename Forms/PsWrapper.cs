@@ -29,30 +29,18 @@ namespace PStarsWrapper.MisForms
             LLenarListBox();
         }
 
-        private void btnCapturarPulsado(object sender, EventArgs e)
-        {
-            if (backgroundWorker1.IsBusy && backgroundWorker1.WorkerSupportsCancellation)
-            {
-                backgroundWorker1.CancelAsync();
-                btnCaptura.Text = "WorkerCancelado";
-            }
-            else
-            {
-                backgroundWorker1.RunWorkerAsync();
-                btnCaptura.Text = "WorkerComenzando";
-            }
-        }
+        
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btnCaptura.Visible = true;
+            
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             while (Util.ObtenerTodosLosArchivos(Util.ruta).Count < 54)
             {
-                Util.RealizarCapturaContinuaCartas();
+                Util.RealizarCapturaCartas();
                 Thread.Sleep(3000);
             }
             
@@ -65,7 +53,47 @@ namespace PStarsWrapper.MisForms
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            this.btnCaptura.Text = "Finalizado!!!";
+           
+        }
+
+        private void resizeBtn_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem != null)
+            {
+                IntPtr handle = Util.FindWindowsWithText(listBox1.SelectedItem.ToString()).First();
+                Util.MoverVentana(handle, 1170, 835);
+            }
+        }
+
+        private void obtenerSizeBtn_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem != null)
+            {
+                IntPtr handle = Util.FindWindowsWithText(listBox1.SelectedItem.ToString()).First();
+                User32.RECT r = new User32.RECT();
+                User32.GetWindowRect(handle, ref r);
+                this.label1.Text = "Width = " + (r.Right - r.Left) + "Height = " + (r.Bottom - r.Top);
+            }
+        }
+
+        private void capturarBtn_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem != null)
+            {
+                using (Bitmap b = Util.CapturarW10(Util.FindWindowsWithText(listBox1.SelectedItem.ToString()).First()))
+                {
+                    b.Save(Util.ruta+"captura.bmp");
+                }
+            }
+        }
+
+        private void btnCapCartas_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem != null)
+            {
+                IntPtr ventana = Util.FindWindowsWithText(listBox1.SelectedItem.ToString()).First();
+                Util.RealizarCapturaCartas(ventana);
+            }
         }
     }
 }

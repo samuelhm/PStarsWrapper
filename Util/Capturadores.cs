@@ -6,6 +6,22 @@ namespace PStarsWrapper
 {
     public static partial class Util
     {
+        public struct PosSizes
+        {
+            public struct CardSize
+            {
+                public static int width = 59;
+                public static int height = 30;
+            }
+
+            public static Point posCarta1 = new Point(512, 536);
+            public static Point posCarta2 = new Point(584, 536);
+            public static Rectangle RectDestinoCarta1 = new Rectangle(0, 0, CardSize.width, CardSize.height);
+            public static Rectangle RectDestinoCarta2 = new Rectangle(0, 0, CardSize.width, CardSize.height);
+            public static Rectangle RectOrigenCarta1 = new Rectangle(posCarta1.X, posCarta1.Y, CardSize.width, CardSize.height);
+            public static Rectangle RectOrigenCarta2 = new Rectangle(posCarta2.X, posCarta2.Y, CardSize.width, CardSize.height);
+        }
+
         public static Bitmap Capturar(IntPtr handle)
         {
             var rect = new User32.RECT();
@@ -43,36 +59,31 @@ namespace PStarsWrapper
             return result;
         }
 
-        public static void RealizarCapturaContinuaCartas()
+        public static void RealizarCapturaCartas()
         {
             IEnumerable<IntPtr> ListaVentanas = Util.FindWindowsWithText("No Limit");
             foreach (IntPtr ventana in ListaVentanas)
             {
                 Image img = CapturarW10(ventana);
-                Bitmap carta1 = new Bitmap(29, 56);
-                Bitmap carta2 = new Bitmap(29, 56);
-                Rectangle RectDestinoCarta1 = new Rectangle(0, 0, carta1.Width, carta1.Height);
-                Rectangle RectDestinoCarta2 = new Rectangle(0, 0, carta2.Width, carta2.Height);
-                Rectangle RectOrigenCarta1 = new Rectangle(578, 619, carta1.Width, carta1.Height);
-                Rectangle RectOrigenCarta2 = new Rectangle(661, 619, carta2.Width, carta2.Height);
+                Bitmap carta1 = new Bitmap(PosSizes.CardSize.width, PosSizes.CardSize.height);
+                Bitmap carta2 = new Bitmap(PosSizes.CardSize.width, PosSizes.CardSize.height);
 
                 using (Graphics gr = Graphics.FromImage(carta1))
                 {
-                    gr.DrawImage(img, RectDestinoCarta1, RectOrigenCarta1, GraphicsUnit.Pixel);
+                    gr.DrawImage(img, PosSizes.RectDestinoCarta1, PosSizes.RectOrigenCarta1, GraphicsUnit.Pixel);
                 }
                 using (Graphics gr = Graphics.FromImage(carta2))
                 {
-                    gr.DrawImage(img, RectDestinoCarta2, RectOrigenCarta2, GraphicsUnit.Pixel);
+                    gr.DrawImage(img, PosSizes.RectDestinoCarta2, PosSizes.RectOrigenCarta2, GraphicsUnit.Pixel);
                 }
 
                 if (!ExisteImagen(carta1))
                 {
                     GuardarImagenCarta(carta1);
                     carta1.Dispose();
-                    Console.WriteLine("No se ha encontrado la imagen de La primera carta, se Guarda");
+                    Console.WriteLine("No Se ha encontrado la imagen de La primera carta, se Guarda");
                 }
                 else Console.WriteLine("Se ha encontrado la imagen de La primera carta, no se Guarda");
-
 
                 if (!ExisteImagen(carta2))
                 {
@@ -80,8 +91,41 @@ namespace PStarsWrapper
                     carta2.Dispose();
                     Console.WriteLine("No se ha encontrado la imagen de La segunda carta, se Guarda");
                 }
-                else Console.WriteLine("No se ha encontrado la imagen de La primera carta, no se Guarda");
+                else Console.WriteLine("Se ha encontrado la imagen de La segunda carta, no se Guarda");
             }
+        }
+
+        public static void RealizarCapturaCartas(IntPtr handle)
+        {
+
+            Image img = CapturarW10(handle);
+            Bitmap carta1 = new Bitmap(PosSizes.CardSize.width, PosSizes.CardSize.height);
+            Bitmap carta2 = new Bitmap(PosSizes.CardSize.width, PosSizes.CardSize.height);
+
+            using (Graphics gr = Graphics.FromImage(carta1))
+            {
+                gr.DrawImage(img, PosSizes.RectDestinoCarta1, PosSizes.RectOrigenCarta1, GraphicsUnit.Pixel);
+            }
+            using (Graphics gr = Graphics.FromImage(carta2))
+            {
+                gr.DrawImage(img, PosSizes.RectDestinoCarta2, PosSizes.RectOrigenCarta2, GraphicsUnit.Pixel);
+            }
+
+            if (!ExisteImagen(carta1))
+            {
+                GuardarImagenCarta(carta1);
+                carta1.Dispose();
+                Console.WriteLine("No Se ha encontrado la imagen de La primera carta, se Guarda");
+            }
+            else Console.WriteLine("Se ha encontrado la imagen de La primera carta, no se Guarda");
+
+            if (!ExisteImagen(carta2))
+            {
+                GuardarImagenCarta(carta2);
+                carta2.Dispose();
+                Console.WriteLine("No se ha encontrado la imagen de La segunda carta, se Guarda");
+            }
+            else Console.WriteLine("Se ha encontrado la imagen de La segunda carta, no se Guarda");
         }
     }
 }

@@ -43,5 +43,7 @@ namespace PStarsWrapper
         /// <returns>Devuelve true o false, si debe seguir iterando</returns>
         public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        internal static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
     }
 }
