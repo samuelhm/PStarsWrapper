@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PStarsWrapper;
 using System.Threading;
+using System.IO;
 
 namespace PStarsWrapper.MisForms
 {
@@ -82,7 +83,12 @@ namespace PStarsWrapper.MisForms
             {
                 using (Bitmap b = Util.CapturarW10(Util.FindWindowsWithText(listBox1.SelectedItem.ToString()).First()))
                 {
-                    b.Save(Util.ruta+"captura.bmp");
+                    int i = 0;
+                    while (File.Exists(Util.ruta + "captura" + i.ToString() + ".bmp"))
+                    {
+                        i++;
+                    }
+                    b.Save(Util.ruta+"captura"+i.ToString()+".bmp");
                 }
             }
         }

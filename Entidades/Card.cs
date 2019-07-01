@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace PStarsWrapper.Entidades
 {
@@ -6,11 +7,21 @@ namespace PStarsWrapper.Entidades
     {
         public Rank Valor { get; }
         public Suits Palo { get; }
+        public Bitmap bmpCarta { get; }
 
         public Card(Rank v, Suits p)
         {
             Valor = v;
             Palo = p;
+            try
+            {
+                bmpCarta = new Bitmap(Image.FromFile(@"..\..\Resources\" + getAbrebName(p, v) + @".bmp"));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error al cargar archivo");
+                Console.WriteLine(e.Message);
+            }
         }
 
         public override string ToString() //Sobreescribimos principalmente para pruebas de desarrollo

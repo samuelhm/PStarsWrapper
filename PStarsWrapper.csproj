@@ -69,6 +69,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entidades\CashPlayer.cs" />
+    <Compile Include="Entidades\Player.cs" />
+    <Compile Include="Entidades\Posiciones.cs" />
+    <Compile Include="Entidades\Table.cs" />
+    <Compile Include="Entidades\TableTypes.cs" />
+    <Compile Include="Entidades\TournamenPlayer.cs" />
     <Compile Include="Externo\USER32.cs" />
     <Compile Include="Externo\GDI32.cs" />
     <Compile Include="Consola.cs" />
